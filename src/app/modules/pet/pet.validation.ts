@@ -1,0 +1,145 @@
+import { z } from "zod";
+
+const Species = z.enum(["DOG", "CAT", "BIRD"], {
+  required_error: "Species is required",
+});
+const Size = z.enum(["SMALL", "MEDIUM", "LARGE"], {
+  required_error: "Size is required",
+});
+const createPetValidationSchema = z.object({
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(1, { message: "Name cannot be empty" }),
+  species: Species,
+  breed: z
+    .string({
+      required_error: "Breed is required",
+    })
+    .min(1, { message: "Breed cannot be empty" }),
+  age: z
+    .number({
+      required_error: "Age is required",
+    })
+    .int()
+    .nonnegative({ message: "Age must be a non-negative integer" }),
+  size: Size,
+  location: z
+    .string({
+      required_error: "Location is required",
+    })
+    .min(1, { message: "Location cannot be empty" }),
+  description: z
+    .string({
+      required_error: "Description is required",
+    })
+    .min(1, { message: "Description cannot be empty" }),
+  temperament: z
+    .string({
+      required_error: "Temperament is required",
+    })
+    .min(1, { message: "Temperament cannot be empty" }),
+  medicalHistory: z
+    .string({
+      required_error: "Medical history is required",
+    })
+    .min(1, { message: "Medical history cannot be empty" }),
+  petPhoto: z
+    .array(
+      z.string().url({
+        message: "Each pet photo must be a valid URL",
+      })
+    )
+    .default([]),
+  adoptionRequirements: z
+    .string({
+      required_error: "Adoption requirements are required",
+    })
+    .min(1, { message: "Adoption requirements cannot be empty" }),
+});
+const updateSpecies = z
+  .enum(["DOG", "CAT", "BIRD"], {
+    required_error: "Species is required",
+  })
+  .optional();
+const updateSize = z
+  .enum(["SMALL", "MEDIUM", "LARGE"], {
+    required_error: "Size is required",
+  })
+  .optional();
+const updatePetValidationSchema = z.object({
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(1, { message: "Name cannot be empty" })
+    .optional(),
+  species: updateSpecies,
+  breed: z
+    .string({
+      required_error: "Breed is required",
+    })
+    .min(1, { message: "Breed cannot be empty" })
+    .optional(),
+  age: z
+    .number({
+      required_error: "Age is required",
+    })
+    .int()
+    .nonnegative({ message: "Age must be a non-negative integer" })
+    .optional(),
+  size: updateSize,
+  location: z
+    .string({
+      required_error: "Location is required",
+    })
+    .min(1, { message: "Location cannot be empty" })
+    .optional(),
+  description: z
+    .string({
+      required_error: "Description is required",
+    })
+    .min(1, { message: "Description cannot be empty" })
+    .optional(),
+  temperament: z
+    .string({
+      required_error: "Temperament is required",
+    })
+    .min(1, { message: "Temperament cannot be empty" })
+    .optional(),
+  medicalHistory: z
+    .string({
+      required_error: "Medical history is required",
+    })
+    .min(1, { message: "Medical history cannot be empty" })
+    .optional(),
+  petPhoto: z
+    .array(
+      z.string().url({
+        message: "Each pet photo must be a valid URL",
+      })
+    )
+    .default([])
+    .optional(),
+  adoptionRequirements: z
+    .string({
+      required_error: "Adoption requirements are required",
+    })
+    .min(1, { message: "Adoption requirements cannot be empty" })
+    .optional(),
+});
+
+const updatePetStatus = z.object({
+  body: z.object({
+    status: z.string({
+      required_error: "pet status is required",
+    }),
+  }),
+});
+
+export const petValidation = {
+  createPetValidationSchema,
+  updatePetValidationSchema,
+  updatePetStatus,
+};
