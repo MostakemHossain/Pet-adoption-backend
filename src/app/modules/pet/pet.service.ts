@@ -40,7 +40,7 @@ const addAPet = async (user: any, req: Request) => {
       temperament: req.body.temperament,
       medicalHistory: req.body.medicalHistory,
       adoptionRequirements: req.body.adoptionRequirements,
-      // petPhoto: [],
+      petPhoto: petPhotos,
     },
   });
 

@@ -10,7 +10,10 @@ const app: Application = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://pet-adoption-front-end-sandy.vercel.app"],
+    origin: [
+      "https://pet-adoption-front-end-sandy.vercel.app",
+      "http://localhost:3000",
+    ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
