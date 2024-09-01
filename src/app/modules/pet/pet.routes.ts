@@ -32,6 +32,7 @@ router.put(
   validateRequest(petValidation.updatePetValidationSchema),
   petController.updatePetProfile
 );
+router.get("/:id", petController.getSinglePet);
 router.put(
   "/:petId/status",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),

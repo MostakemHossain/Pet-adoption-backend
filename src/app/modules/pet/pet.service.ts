@@ -112,6 +112,15 @@ const getAllPet = async (params: IPetFilterRequest, options: TPagination) => {
   };
 };
 
+const getSinglePet = async (id: string) => {
+  const result = await prisma.pet.findUniqueOrThrow({
+    where: {
+      id: id,
+    },
+  });
+  return result;
+};
+
 const getMyAddPetPosts = async (
   params: IPetFilterRequest,
   options: TPagination,
@@ -233,4 +242,5 @@ export const petService = {
   getMyAddPetPosts,
   updatePetProfile,
   updatePetStatus,
+  getSinglePet,
 };
