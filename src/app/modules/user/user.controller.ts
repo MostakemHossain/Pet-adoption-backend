@@ -110,6 +110,17 @@ const updateRole = catchAsync(
     });
   }
 );
+const adminDashboardInfo = catchAsync(
+  async (req: Request & { user?: any }, res: Response) => {
+    const result = await userServices.adminDashboardInfo();
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Admin dashboard Info Retrieved Successfully",
+      data: result,
+    });
+  }
+);
 export const userController = {
   createUser,
   getAllUser,
@@ -119,4 +130,5 @@ export const userController = {
   updateUserRoleStatus,
   getMyProfile,
   updateRole,
+  adminDashboardInfo,
 };

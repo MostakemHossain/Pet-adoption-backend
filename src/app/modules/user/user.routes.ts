@@ -21,6 +21,11 @@ router.get(
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
   userController.getAllUser
 );
+router.get(
+  "/stat",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  userController.adminDashboardInfo
+);
 router.get("/:userId", userController.getSingleUser);
 router.delete("/:userId", userController.deleteAUser);
 

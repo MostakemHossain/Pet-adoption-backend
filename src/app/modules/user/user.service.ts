@@ -213,6 +213,22 @@ const updateRole = async (payload: Partial<User>, id: string, user: any) => {
     throw new Error(`User does not have permission to update roles.`);
   }
 };
+
+const adminDashboardInfo = async () => {
+  const user = await prisma.user.count();
+  const pet = await prisma.pet.count({
+    where: {
+      status: "APPROVED",
+    },
+  });
+  const adoption = await prisma.adoptionRequest.count({});
+
+  return {
+    user,
+    pet,
+    adoption,
+  };
+};
 export const userServices = {
   createUser,
   getAllUsers,
@@ -222,4 +238,5 @@ export const userServices = {
   updateUserRoleStatus,
   getMyProfile,
   updateRole,
+  adminDashboardInfo,
 };
